@@ -56,3 +56,39 @@ def infixToPostfix(infixexpression):
     if(len(stack)!=0):
         raise TypeError("Wrong expression")
     return ans
+
+def infixToPrefix(infixexpression):
+    if not isExpressionValid(infixexpression):
+        return []
+    infixexpression2=st(infixexpression,"+-*/%()",True)
+    infixexpression3=[]
+    while infixexpression2.hasMoreTokens():
+        infixexpression3.append(infixexpression2.nextToken())
+    infixexpression3.reverse()
+
+    for i,ch in enumerate(infixexpression3):
+        if(ch=='('):
+            infixexpression3[i]=')'
+        elif(ch==')'):
+            infixexpression3[i]='('
+
+    infixexpression3.append(')')
+    stack=['(',]
+    ans=[]
+    for i in infixexpression3:
+        if i in "+-*/()%^":
+            if i == '(':
+                stack.append(i)
+            elif i==')':
+                while stack[-1]!='(':
+                    ans.append(stack.pop())
+                stack.pop()
+            else:
+                while stack and __precedence.get(stack[-1], 0) > __precedence[i]:
+                    ans.append(stack.pop())
+                stack.append(i)
+        else:
+            ans.append(i)
+    if(len(stack)!=0):
+        raise TypeError("Wrong expression")
+    return ans[::-1]
