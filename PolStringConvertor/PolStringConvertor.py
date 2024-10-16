@@ -4,7 +4,19 @@ __precedence={'+':1,'-':1,
               '*':2,"/":2,"%":2,
               "^":3}
 
-def isExpressionValid(expression):
+def isExpressionValid(expression: str) -> bool:
+    """
+    Validates an infix expression for correct operator placement and balanced parentheses.
+
+    Parameters:
+    expression (str): The infix expression to validate.
+
+    Returns:
+    bool: True if the expression is valid, False otherwise.
+    """
+    if not isinstance(expression, str):
+        raise TypeError("Expression must be a string.")
+    
     stack=[]
     previous_char=""
     operators=set("+-*/%^")
@@ -31,7 +43,19 @@ def isExpressionValid(expression):
     
     return True
 
-def infixToPostfix(infixexpression):
+def infixToPostfix(infixexpression: str) -> list[str]:
+    """
+    Converts an infix expression to a postfix expression.
+
+    Parameters:
+    infixexpression (str): The infix expression to convert.
+
+    Returns:
+    List[str]: The postfix expression as a list of tokens.
+    """
+    if not isinstance(infixexpression, str):
+        raise TypeError("Infix expression must be a string.")
+    
     if not isExpressionValid(infixexpression):
         return []
     infixexpression=infixexpression+')'
@@ -57,7 +81,20 @@ def infixToPostfix(infixexpression):
         raise TypeError("Wrong expression")
     return ans
 
-def infixToPrefix(infixexpression):
+
+def infixToPrefix(infixexpression: str) -> list[str]:
+    """
+    Converts an infix expression to a prefix expression.
+
+    Parameters:
+    infixexpression (str): The infix expression to convert.
+
+    Returns:
+    List[str]: The prefix expression as a list of tokens.
+    """
+    if not isinstance(infixexpression, str):
+        raise TypeError("Infix expression must be a string.")
+    
     if not isExpressionValid(infixexpression):
         return []
     infixexpression2=st(infixexpression,"+-*/%()",True)
@@ -94,7 +131,19 @@ def infixToPrefix(infixexpression):
     return ans[::-1]
 
 
-def evaluatePostfixExpression(expression):
+def evaluatePostfixExpression(expression: list[str]) -> float:
+    """
+    Evaluates a postfix expression.
+
+    Parameters:
+    expression (List[str]): The postfix expression as a list of string.
+
+    Returns:
+    float: The result of evaluating the postfix expression.
+    """
+    if not isinstance(expression, list):
+        raise TypeError("Expression must be a list.")
+    
     stack=[]
     for i in expression:
         if i in "+-*/%^":
@@ -118,7 +167,10 @@ def evaluatePostfixExpression(expression):
             else:
                 raise TypeError("Wrong expression")
         else:
-            stack.append(float(i))
+            try:
+                stack.append(float(i))
+            except ValueError:
+                raise ValueError(f"Invalid operand: {i}")
 
     if(len(stack)==1):
         return stack[0]
