@@ -85,7 +85,7 @@ print(result)  # Output: 2.0
 
 You can install the `PolStringConvertor` package from PyPI:
 
-[Install StrTokenizer from PyPI](https://pypi.org/project/PolStringConvertor/1.0.0/)
+[Install PolStringConvertor from PyPI](https://pypi.org/project/PolStringConvertor/1.0.0/)
 
 ## Source Code:
 
