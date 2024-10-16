@@ -5,7 +5,7 @@ setup(
     version="1.0.0", 
     author="Imon Mallik", 
     author_email="imoncoding@gmail.com",
-    description="A package to convert infix expressions to postfix/prefix and evaluate them",  # Short description
+    description="A package to convert infix expressions to postfix/prefix and evaluate them", 
     long_description=open('README.md').read(), 
     long_description_content_type="text/markdown", 
     url="https://github.com/CyberPokemon/PolStringConvertor", 
