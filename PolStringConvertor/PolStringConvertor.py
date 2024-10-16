@@ -92,3 +92,35 @@ def infixToPrefix(infixexpression):
     if(len(stack)!=0):
         raise TypeError("Wrong expression")
     return ans[::-1]
+
+
+def evaluatePostfixExpression(expression):
+    stack=[]
+    for i in expression:
+        if i in "+-*/%^":
+            if len(stack)>=2:
+                a=stack.pop()
+                b=stack.pop()
+                if i =='+':
+                    stack.append(b+a)
+                elif i =='-':
+                    stack.append(b-a)
+                elif i =='*':
+                    stack.append(b*a)
+                elif i =='/':
+                    if a == 0:
+                        raise ZeroDivisionError("Division by zero is not allowed")
+                    stack.append(b/a)
+                elif i =='%':
+                    stack.append(b%a)
+                elif i =='^':
+                    stack.append(b**a)
+            else:
+                raise TypeError("Wrong expression")
+        else:
+            stack.append(float(i))
+
+    if(len(stack)==1):
+        return stack[0]
+    else:
+        raise TypeError("Wrong expression")
